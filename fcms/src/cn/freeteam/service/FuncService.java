@@ -1,10 +1,12 @@
 package cn.freeteam.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import cn.freeteam.base.BaseService;
+import cn.freeteam.cms.model.TreeMenu;
 import cn.freeteam.dao.FuncMapper;
 import cn.freeteam.model.Func;
 import cn.freeteam.model.FuncExample;
@@ -61,6 +63,47 @@ public class FuncService extends BaseService{
 	public List<Func> selectRoot(){
 		return funcMapper.selectRoot();
 	}
+	/**
+	 * 将根菜单转换为easyui识别的菜单
+	 * @return
+	 */
+	public List<TreeMenu> func2FatherEasyUiMenu(List<Func> funcList){
+		List<TreeMenu> treeList=new ArrayList<TreeMenu>();
+		TreeMenu tree=new TreeMenu();
+		Map<String, String> attributes = new HashMap<String, String>();
+		
+		for(Func func:funcList){
+			tree.setId(func.getId());
+			tree.setText(func.getName());
+			attributes.put("url", func.getUrl());
+			attributes.put("target", func.getTarget());
+			tree.setAttributes(attributes);
+			treeList.add(tree);
+		}
+		return treeList;
+	}
+	
+	/**
+	 * 将多级菜单转换为easyui识别的菜单
+	 * @return
+	 */
+	public List<TreeMenu> func2ChildEasyUiMenu(List<Func> funcList){
+		List<TreeMenu> treeList=new ArrayList<TreeMenu>();
+		TreeMenu tree=new TreeMenu();
+		Map<String, String> attributes = new HashMap<String, String>();
+		
+		for(Func func:funcList){
+			tree.setId(func.getId());
+			tree.setText(func.getName());
+			tree.setPid(func.getParid());
+			attributes.put("url", func.getUrl());
+			attributes.put("target", func.getTarget());
+			tree.setAttributes(attributes);
+			treeList.add(tree);
+		}
+		return treeList;
+	}
+	
 	/**
 	 * 查询所有
 	 * @return

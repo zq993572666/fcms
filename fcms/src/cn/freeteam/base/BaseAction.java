@@ -1,7 +1,6 @@
 package cn.freeteam.base;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +26,7 @@ import cn.freeteam.model.Users;
 import cn.freeteam.service.ConfigService;
 import cn.freeteam.service.RoleService;
 import cn.freeteam.service.UnitService;
+import cn.freeteam.util.JsonUtil;
 
 
 
@@ -97,6 +97,20 @@ public class BaseAction extends BaseService{
 		String basePath = getHttpRequest().getScheme()+"://"+getHttpRequest().getServerName()+":"+getHttpRequest().getServerPort()+path+"/";
 		return basePath;
 	}
+	
+	public void objectToJsonString(Object object){
+		getHttpResponse().setCharacterEncoding("UTF-8"); 
+		getHttpResponse().setContentType("application/json");  
+		    try {
+				String jsonString=JsonUtil.objectToJson(object);
+				getHttpResponse().getWriter().print(jsonString);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    
+		}
+	
 	/**
 	 * 获取配置
 	 * @return

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%> 
 
+<%@taglib prefix="fs" uri="/fs-tags" %>
+<%
+String contextPath = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+contextPath+"/";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,75 +16,13 @@
 	var mainTabs;
 	var basePath=basePath;
 	$(function() {
-		debugger
-		alert("sy   "+sy);
-		var loginFun = function() {
-			if ($('#loginDialog form').form('validate')) {
-				$('#loginBtn').linkbutton('disable');
-			
-				$.post(sy.contextPath + '/base/syuser!doNotNeedSessionAndSecurity_login.sy', $('#loginDialog form').serialize(), function(result) {
-					if (result.success) {
-						$('#loginDialog').dialog('close');
-					} else {
-						$.messager.alert('提示', result.msg, 'error', function() {
-							$('#loginDialog form :input:eq(1)').focus();
-						});
-					}
-					$('#loginBtn').linkbutton('enable');
-				}, 'json');
-			}
-		};
-		$('#loginDialog').show().dialog({
-			modal : true,
-			closable : false,
-			iconCls : 'ext-icon-lock_open',
-			buttons : [ {
-				id : 'loginBtn',
-				text : '登录',
-				handler : function() {
-					loginFun();
-				}
-			} ],
-			onOpen : function() {
-				$('#loginDialog form :input[name="data.pwd"]').val('');
-				$('form :input').keyup(function(event) {
-					if (event.keyCode == 13) {
-						loginFun();
-					}
-				});
-			}
-		}).dialog('close');
-
-		$('#passwordDialog').show().dialog({
-			modal : true,
-			closable : true,
-			iconCls : 'ext-icon-lock_edit',
-			buttons : [ {
-				text : '修改',
-				handler : function() {
-					if ($('#passwordDialog form').form('validate')) {
-						$.post(sy.contextPath + '/base/syuser!doNotNeedSecurity_updateCurrentPwd.sy', {
-							'data.pwd' : $('#pwd').val()
-						}, function(result) {
-							if (result.success) {
-								$.messager.alert('提示', '密码修改成功！', 'info');
-								$('#passwordDialog').dialog('close');
-							}
-						}, 'json');
-					}
-				}
-			} ],
-			onOpen : function() {
-				$('#passwordDialog form :input').val('');
-			}
-		}).dialog('close');
 
 		mainMenu = $('#mainMenu').tree({
 			url : sy.basePath  + '/admin/admin_left.do',
 			parentField : 'pid',
 			onClick : function(node) {
 				if (node.attributes.url) {
-					var src =basePath + node.attributes.url;
+					var src =basePath + "/"+node.attributes.url;
 					if (!sy.startWith(node.attributes.url, '/')) {
 						src = node.attributes.url;
 					}
@@ -184,7 +128,7 @@
 </script>
 </head>
 <body id="mainLayout" class="easyui-layout">
-	<div data-options="region:'north',href:'<%=contextPath%>/securityJsp/north.jsp'" style="height: 70px; overflow: hidden;" class="logo"></div>
+
 	<div data-options="region:'west',href:'',split:true" title="导航" style="width: 200px; padding: 10px;">
 		<ul id="mainMenu"></ul>
 	</div>
@@ -195,36 +139,6 @@
 			</div>
 		</div>
 	</div>
-	<div data-options="region:'south',href:'<%=contextPath%>/securityJsp/south.jsp',border:false" style="height: 30px; overflow: hidden;"></div>
-
-	<div id="loginDialog" title="解锁登录" style="display: none;">
-		<form method="post" class="form" onsubmit="return false;">
-			<table class="table">
-				<tr>
-					<th width="50">登录名</th>
-					<td><%=sessionInfo.getUser().getLoginname()%><input name="data.loginname" readonly="readonly" type="hidden" value="<%=sessionInfo.getUser().getLoginname()%>" /></td>
-				</tr>
-				<tr>
-					<th>密码</th>
-					<td><input name="data.pwd" type="password" class="easyui-validatebox" data-options="required:true" /></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-
-	<div id="passwordDialog" title="修改密码" style="display: none;">
-		<form method="post" class="form" onsubmit="return false;">
-			<table class="table">
-				<tr>
-					<th>新密码</th>
-					<td><input id="pwd" name="data.pwd" type="password" class="easyui-validatebox" data-options="required:true" /></td>
-				</tr>
-				<tr>
-					<th>重复密码</th>
-					<td><input type="password" class="easyui-validatebox" data-options="required:true,validType:'eqPwd[\'#pwd\']'" /></td>
-				</tr>
-			</table>
-		</form>
-	</div>
+	
 </body>
 </html>

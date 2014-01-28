@@ -4,13 +4,12 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-
 import cn.freeteam.base.BaseAction;
 import cn.freeteam.cms.model.RoleSite;
 import cn.freeteam.cms.model.Site;
+import cn.freeteam.cms.model.TreeMenu;
 import cn.freeteam.cms.service.RoleSiteService;
 import cn.freeteam.cms.service.SiteService;
-import cn.freeteam.dao.FuncMapper;
 import cn.freeteam.model.Adminlink;
 import cn.freeteam.model.Func;
 import cn.freeteam.service.AdminlinkService;
@@ -44,6 +43,7 @@ import cn.freeteam.service.FuncService;
 public class AdminAction extends BaseAction{
 
 	private List<Func> funcList;
+	private List<TreeMenu> treeMenuList;
 	private FuncService funcService;
 	private SiteService siteService;
 	private RoleSiteService roleSiteService;
@@ -62,6 +62,7 @@ public class AdminAction extends BaseAction{
 	 * 后台首页左边页面
 	 */
 	public String left(){
+		
 		//先清除session变量
 		Site manageSite=null;
 		if (siteid!=null && siteid.trim().length()>0) {
@@ -90,8 +91,10 @@ public class AdminAction extends BaseAction{
 				//提取一级菜单 
 				if (isAdminLogin()) {
 					funcList=funcService.selectRoot();
+					treeMenuList=funcService.func2FatherEasyUiMenu(funcList);
 				}else {
 					funcList=funcService.selectRootAuth(getLoginAdmin().getId());
+					treeMenuList=funcService.func2FatherEasyUiMenu(funcList);
 				}
 				if (funcList!=null && funcList.size()>0) {
 					funcid=funcList.get(0).getId();
@@ -114,8 +117,10 @@ public class AdminAction extends BaseAction{
 		if (getHttpSession().getAttribute("funcs")==null) {
 			if (isAdminLogin()) {
 				funcList=funcService.selectAll();
+				treeMenuList=funcService.func2ChildEasyUiMenu(funcList);
 			}else {
 				funcList=funcService.selectAllAuth(getLoginAdmin().getId());
+				treeMenuList=funcService.func2ChildEasyUiMenu(funcList);
 			}
 			if (funcList!=null && funcList.size()>0) {
 				for (int i = 0; i < funcList.size(); i++) {
@@ -126,6 +131,7 @@ public class AdminAction extends BaseAction{
 			}
 			getHttpSession().setAttribute("funcs", funcList);
 		}
+		objectToJsonString(treeMenuList);
 		return "left";
 	}
 	/**

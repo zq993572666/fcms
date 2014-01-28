@@ -12,7 +12,7 @@ import cn.freeteam.util.MybatisSessionFactory;
  * @author freeteam
  * 2011-6-14
  */
-public class Base {
+public class Base{
 
 	/**
 	 * 初始化指定变量
