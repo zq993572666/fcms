@@ -16,8 +16,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var mainTabs;
 	var basePath=basePath;
 	$(function() {
-
-		mainMenu = $('#mainMenu').tree({
+debugger
+		 mainMenu = $('#mainMenu').tree({
 			url : sy.basePath  + '/admin/admin_left.do',
 			parentField : 'pid',
 			onClick : function(node) {
@@ -47,8 +47,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}
 				}
 			}
-		});
-
+		}); 
+ 
 		$('#mainLayout').layout('panel', 'center').panel({
 			onResize : function(width, height) {
 				sy.setIframeHeight('centerIframe', $('#mainLayout').layout('panel', 'center').panel('options').height - 5);
@@ -135,7 +135,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div data-options="region:'center'" style="overflow: hidden;">
 		<div id="mainTabs">
 			<div title="关于SSHE" data-options="iconCls:'ext-icon-heart'">
-				<iframe src="<%=contextPath%>/welcome.jsp" allowTransparency="true" style="border: 0; width: 100%; height: 99%;" frameBorder="0"></iframe>
+				<iframe src="NewFile.jsp" allowTransparency="true" style="border: 0; width: 100%; height: 99%;" frameBorder="0"></iframe>
 			</div>
 		</div>
 	</div>

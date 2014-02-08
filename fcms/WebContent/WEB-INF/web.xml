@@ -15,18 +15,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-<!-- 	<filter>
-		<filter-name>loginFilter</filter-name>
-		<filter-class>cn.freeteam.filter.LoginFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>loginFilter</filter-name>
-		<url-pattern>/admin/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>loginFilter</filter-name>
-		<url-pattern>/admin/cms/*</url-pattern>
-	</filter-mapping> -->
+
 	<filter>
 		<filter-name>memberLoginFilter</filter-name>
 		<filter-class>cn.freeteam.filter.MemberLoginFilter</filter-class>
@@ -121,10 +110,10 @@
 		<servlet-class>cn.freeteam.cms.util.QuartzInitializer</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-    <error-page>
+   <!--  <error-page>
 	<error-code>404</error-code>
 	<location>/error.jsp</location>
-	</error-page>
+	</error-page> -->
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

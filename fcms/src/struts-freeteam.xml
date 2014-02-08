@@ -7,7 +7,7 @@
 
 	<package name="root" extends="struts-default" namespace="/">
 		<action name="login_*" method="{1}" class="cn.freeteam.action.LoginAction">
-			<result name="admin" type="redirect">/main/index.jsp</result>
+			<result name="admin" type="redirect">/inc/main.jsp</result>
 			<result name="login" >/login.jsp</result>
 		</action>
 	</package>
@@ -34,7 +34,7 @@
 		<action name="operButton_*" method="{1}" class="cn.freeteam.action.OperButtonAction">
 		</action>
 		<action name="admin_*" method="{1}" class="cn.freeteam.action.AdminAction">
-			<result name="left" >/admin/left.jsp</result>
+			<!-- <result name="left" >/admin/left.jsp</result> -->
 			<result name="top" >/admin/top.jsp</result>
 			<result name="right" >/admin/right.jsp</result>
 		</action>

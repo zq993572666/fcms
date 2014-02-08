@@ -132,7 +132,7 @@ public class AdminAction extends BaseAction{
 			getHttpSession().setAttribute("funcs", funcList);
 		}
 		objectToJsonString(treeMenuList);
-		return "left";
+		return null;
 	}
 	/**
 	 * 头部
