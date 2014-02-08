@@ -7,11 +7,11 @@ import org.apache.commons.lang3.StringUtils;
 import cn.freeteam.base.BaseAction;
 import cn.freeteam.cms.model.RoleSite;
 import cn.freeteam.cms.model.Site;
-import cn.freeteam.cms.model.TreeMenu;
 import cn.freeteam.cms.service.RoleSiteService;
 import cn.freeteam.cms.service.SiteService;
 import cn.freeteam.model.Adminlink;
 import cn.freeteam.model.Func;
+import cn.freeteam.model.TreeMenu;
 import cn.freeteam.service.AdminlinkService;
 import cn.freeteam.service.FuncService;
 
@@ -62,7 +62,7 @@ public class AdminAction extends BaseAction{
 	 * 后台首页左边页面
 	 */
 	public String left(){
-		
+		List<Func> funcTreeList=null;
 		//先清除session变量
 		Site manageSite=null;
 		if (siteid!=null && siteid.trim().length()>0) {
@@ -90,14 +90,14 @@ public class AdminAction extends BaseAction{
 				//设置为第一个根菜单
 				//提取一级菜单 
 				if (isAdminLogin()) {
-					funcList=funcService.selectRoot();
-					treeMenuList=funcService.func2FatherEasyUiMenu(funcList);
+					funcTreeList=funcService.selectRoot();
+					treeMenuList=funcService.func2FatherEasyUiMenu(funcTreeList);
 				}else {
-					funcList=funcService.selectRootAuth(getLoginAdmin().getId());
-					treeMenuList=funcService.func2FatherEasyUiMenu(funcList);
+					funcTreeList=funcService.selectRootAuth(getLoginAdmin().getId());
+					treeMenuList=funcService.func2FatherEasyUiMenu(funcTreeList);
 				}
-				if (funcList!=null && funcList.size()>0) {
-					funcid=funcList.get(0).getId();
+				if (funcTreeList!=null && funcTreeList.size()>0) {
+					funcid=funcTreeList.get(0).getId();
 				}
 			}
 		}
@@ -116,23 +116,24 @@ public class AdminAction extends BaseAction{
 		//提取权限并放到session中
 		if (getHttpSession().getAttribute("funcs")==null) {
 			if (isAdminLogin()) {
-				funcList=funcService.selectAll();
-				treeMenuList=funcService.func2ChildEasyUiMenu(funcList);
+				funcTreeList=funcService.selectAll();
+				treeMenuList=funcService.func2ChildEasyUiMenu(funcTreeList);
 			}else {
-				funcList=funcService.selectAllAuth(getLoginAdmin().getId());
-				treeMenuList=funcService.func2ChildEasyUiMenu(funcList);
+				funcTreeList=funcService.selectAllAuth(getLoginAdmin().getId());
+				treeMenuList=funcService.func2ChildEasyUiMenu(funcTreeList);
 			}
-			if (funcList!=null && funcList.size()>0) {
-				for (int i = 0; i < funcList.size(); i++) {
-					if (funcService.haveSon(funcList.get(i).getId())) {
-						funcList.get(i).setHasChildren("1");
+			if (funcTreeList!=null && funcTreeList.size()>0) {
+				for (int i = 0; i < funcTreeList.size(); i++) {
+					if (funcService.haveSon(funcTreeList.get(i).getId())) {
+						funcTreeList.get(i).setHasChildren("1");
 					}
 				}
 			}
-			getHttpSession().setAttribute("funcs", funcList);
+			getHttpSession().setAttribute("funcs", funcTreeList);
 		}
+//		funcList=funcTreeList;
 		objectToJsonString(treeMenuList);
-		return null;
+		return "left";
 	}
 	/**
 	 * 头部

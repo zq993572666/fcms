@@ -1,12 +1,12 @@
-package cn.freeteam.cms.model;
+package cn.freeteam.model;
 
 
 import java.util.List;
 
 /**
- * EasyUI tree模型
+ * EasyUI treeMenu模型
  * 
- * @author 孙宇
+ * @author zhaoqun
  * 
  */
 public class TreeMenu implements java.io.Serializable {

@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import cn.freeteam.base.BaseService;
-import cn.freeteam.cms.model.TreeMenu;
 import cn.freeteam.dao.FuncMapper;
 import cn.freeteam.model.Func;
 import cn.freeteam.model.FuncExample;
 import cn.freeteam.model.FuncExample.Criteria;
+import cn.freeteam.model.TreeMenu;
 
 
 /**
@@ -79,6 +79,7 @@ public class FuncService extends BaseService{
 			attributes.put("url", func.getUrl());
 			attributes.put("target", func.getTarget());
 			tree.setAttributes(attributes);
+			tree.setIconCls(func.getIconCls());
 			treeList.add(tree);
 		}
 		return treeList;
@@ -101,6 +102,7 @@ public class FuncService extends BaseService{
 			attributes.put("url", func.getUrl());
 			attributes.put("target", func.getTarget());
 			tree.setAttributes(attributes);
+			tree.setIconCls(func.getIconCls());
 			treeList.add(tree);
 		}
 		return treeList;

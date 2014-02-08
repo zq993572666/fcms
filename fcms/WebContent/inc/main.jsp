@@ -2,10 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%> 
 
 <%@taglib prefix="fs" uri="/fs-tags" %>
-<%
-String contextPath = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+contextPath+"/";
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,18 +11,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	var mainMenu;
 	var mainTabs;
-	var basePath=basePath;
 	$(function() {
 debugger
+
 		 mainMenu = $('#mainMenu').tree({
 			url : sy.basePath  + '/admin/admin_left.do',
 			parentField : 'pid',
 			onClick : function(node) {
+				debugger
 				if (node.attributes.url) {
-					var src =basePath + "/"+node.attributes.url;
-					if (!sy.startWith(node.attributes.url, '/')) {
+					var src =sy.basePath+ "/admin/"+node.attributes.url;
+					/* if (!sy.startWith(node.attributes.url, '/')) {
 						src = node.attributes.url;
-					}
+					} */
 					
 					if (node.attributes.target && node.attributes.target.length > 0) {
 						window.open(src, node.attributes.target);
