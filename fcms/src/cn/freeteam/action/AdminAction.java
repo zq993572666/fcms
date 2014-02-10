@@ -132,11 +132,14 @@ public class AdminAction extends BaseAction{
 					}
 				}
 			}
-			String jsonTreeMenu=JsonUtil.objectToJson(treeMenuList);
+			//String jsonTreeMenu=JsonUtil.objectToJson(treeMenuList);
 			//getHttpSession().setAttribute("funcs", funcTreeList);
-			getHttpSession().setAttribute("funcs", jsonTreeMenu);
+			getHttpSession().setAttribute("funcs", treeMenuList);
 		}
-		//funcList=funcTreeList;
+		List<TreeMenu> sessionFuncs=(List<TreeMenu>) getHttpSession().getAttribute("funcs");
+		if(sessionFuncs!=null||sessionFuncs.size()!=0){
+			objectToJsonString(sessionFuncs);
+		}
 		
 		return "left";
 	}
