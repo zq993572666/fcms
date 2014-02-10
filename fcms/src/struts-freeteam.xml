@@ -4,7 +4,11 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-
+	<package name="testognl" extends="struts-default" >
+		<action name="addnumberAction" method="add" class="cn.freeteam.action.NumberAction">
+			<result name="add" >/testognl.jsp</result>
+		</action>
+	</package>
 	<package name="root" extends="struts-default" namespace="/">
 		<action name="login_*" method="{1}" class="cn.freeteam.action.LoginAction">
 			<result name="admin" type="redirect">/inc/main.jsp</result>
@@ -34,7 +38,7 @@
 		<action name="operButton_*" method="{1}" class="cn.freeteam.action.OperButtonAction">
 		</action>
 		<action name="admin_*" method="{1}" class="cn.freeteam.action.AdminAction">
-		<!-- 	<result name="left" >/admin/left.jsp</result> -->
+			<result name="left" >/inc/left.jsp</result>
 			<result name="top" >/admin/top.jsp</result>
 			<result name="right" >/admin/right.jsp</result>
 		</action>

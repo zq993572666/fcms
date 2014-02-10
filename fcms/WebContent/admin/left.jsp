@@ -52,7 +52,6 @@ a:link, a:visited ,a: hover, a:active{
 </div>
 <div class="columncontent" style="text-align:left">
 <ul class="container">
-
 	<s:iterator value="#session.funcs" id="bean">
 	<s:if test="%{#bean.parid==funcid}">
       <li class="menu">

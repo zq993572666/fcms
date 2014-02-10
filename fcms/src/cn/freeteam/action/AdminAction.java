@@ -1,5 +1,6 @@
 package cn.freeteam.action;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +15,7 @@ import cn.freeteam.model.Func;
 import cn.freeteam.model.TreeMenu;
 import cn.freeteam.service.AdminlinkService;
 import cn.freeteam.service.FuncService;
+import cn.freeteam.util.JsonUtil;
 
 
 /**
@@ -45,8 +47,8 @@ public class AdminAction extends BaseAction{
 	private List<Func> funcList;
 	private List<TreeMenu> treeMenuList;
 	private FuncService funcService;
-	private SiteService siteService;
 	private RoleSiteService roleSiteService;
+	private SiteService siteService;
 	private AdminlinkService adminlinkService;
 	
 	private List<Adminlink> syslink;
@@ -60,8 +62,9 @@ public class AdminAction extends BaseAction{
 	}
 	/**
 	 * 后台首页左边页面
+	 * @throws Exception 
 	 */
-	public String left(){
+	public String left() throws Exception{
 		List<Func> funcTreeList=null;
 		//先清除session变量
 		Site manageSite=null;
@@ -129,10 +132,12 @@ public class AdminAction extends BaseAction{
 					}
 				}
 			}
-			getHttpSession().setAttribute("funcs", funcTreeList);
+			String jsonTreeMenu=JsonUtil.objectToJson(treeMenuList);
+			//getHttpSession().setAttribute("funcs", funcTreeList);
+			getHttpSession().setAttribute("funcs", jsonTreeMenu);
 		}
-//		funcList=funcTreeList;
-		objectToJsonString(treeMenuList);
+		//funcList=funcTreeList;
+		
 		return "left";
 	}
 	/**

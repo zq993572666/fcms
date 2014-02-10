@@ -97,12 +97,7 @@ img {border:0}
 			</span><br /></div>
 			
 			<div class="input_pwd">用户名:
-			
-						
-						
-						
 						<input id="username" name="user.loginname" class="colorblur" tabindex="1" accesskey="n" type="text" value="" size="25" autocomplete="false"/>
-						
 			<span id="RequiredFieldValidator1" style="color:Red;">*</span>
 			<span id="ctl01" style="color:Red;display:none;">*</span></div>
             
