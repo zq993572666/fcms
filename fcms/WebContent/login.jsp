@@ -112,8 +112,7 @@ img {border:0}
 			</div>
             
 			<div class="input_post">
-						<input type="hidden" name="lt" value="_c3F041F78-53B9-69A5-3B3C-01BAB6E90925_k37408022-0986-F9AF-9DBB-8FBEC82968E9" />
-						<input type="hidden" name="_eventId" value="submit" />
+						
  
                         <input class="button"   name="submit" accesskey="l" value="登 录" tabindex="4" type="submit" />
                    

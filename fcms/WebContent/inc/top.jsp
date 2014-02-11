@@ -1,10 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="sy.model.base.SessionInfo"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
-	String contextPath = request.getContextPath();
-	SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@include file="../util/checkParentFrame.jsp" %>
+
 <script type="text/javascript" charset="utf-8">
+	function leftMenuFlush(fid){
+		debugger
+		p =window.parent;
+		p .flushMenu(fid);
+	}
+	var updatePwd=function(){
+		
+	}
 	var lockWindowFun = function() {
 		$.post(sy.contextPath + '/base/syuser!doNotNeedSessionAndSecurity_logout.sy', function(result) {
 			$('#loginDialog').dialog('open');
@@ -23,11 +33,18 @@
 	};
 </script>
 <div id="sessionInfoDiv" style="position: absolute; right: 10px; top: 5px;">
-	<%
-		if (sessionInfo != null) {
-			out.print(sy.util.base.StringUtil.formateString("欢迎您，{0}", sessionInfo.getUser().getLoginname()));
+<%
+		if (session.getAttribute("loginAdmin") != null) {
+			%>
+			欢迎您， ${loginAdmin.name }
+			<%
 		}
-	%>
+%>
+</div>
+<div style="position: absolute; left: 200px; bottom: 0px;">
+<s:iterator value="funcList" status="status" id="bean">
+	<a href="javascript:void(0);" onclick="leftMenuFlush('<s:property value="id"/>');" class="easyui-menubutton" data-options="iconCls:'ext-icon-rainbow'"><s:property value="name"/></a> 
+</s:iterator>
 </div>
 <div style="position: absolute; right: 0px; bottom: 0px;">
 	<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_pfMenu',iconCls:'ext-icon-rainbow'">更换皮肤</a> <a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_kzmbMenu',iconCls:'ext-icon-cog'">控制面板</a> <a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_zxMenu',iconCls:'ext-icon-disconnect'">注销</a>

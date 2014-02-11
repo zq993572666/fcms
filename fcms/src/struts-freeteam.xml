@@ -38,8 +38,8 @@
 		<action name="operButton_*" method="{1}" class="cn.freeteam.action.OperButtonAction">
 		</action>
 		<action name="admin_*" method="{1}" class="cn.freeteam.action.AdminAction">
-			<result name="left" >/inc/left.jsp</result>
-			<result name="top" >/admin/top.jsp</result>
+		<!-- 	<result name="left" >/inc/left.jsp</result> -->
+			<result name="top" >/inc/top.jsp</result>
 			<result name="right" >/admin/right.jsp</result>
 		</action>
 		<action name="role_*" method="{1}" class="cn.freeteam.action.RoleAction">

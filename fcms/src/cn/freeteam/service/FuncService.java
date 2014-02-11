@@ -70,12 +70,13 @@ public class FuncService extends BaseService{
 	public List<TreeMenu> func2FatherEasyUiMenu(List<Func> funcList){
 		List<TreeMenu> treeList=new ArrayList<TreeMenu>();
 		
-		Map<String, String> attributes = new HashMap<String, String>();
+	
 		TreeMenu tree;
 		for(Func func:funcList){
 			tree=new TreeMenu();
 			tree.setId(func.getId());
 			tree.setText(func.getName());
+			Map<String, String> attributes = new HashMap<String, String>();
 			attributes.put("url", func.getUrl());
 			attributes.put("target", func.getTarget());
 			tree.setAttributes(attributes);
@@ -92,13 +93,14 @@ public class FuncService extends BaseService{
 	public List<TreeMenu> func2ChildEasyUiMenu(List<Func> funcList){
 		List<TreeMenu> treeList=new ArrayList<TreeMenu>();
 		
-		Map<String, String> attributes = new HashMap<String, String>();
+		
 		TreeMenu tree;
 		for(Func func:funcList){
 			tree=new TreeMenu();
 			tree.setId(func.getId());
 			tree.setText(func.getName());
 			tree.setPid(func.getParid());
+			Map<String, String> attributes = new HashMap<String, String>();
 			attributes.put("url", func.getUrl());
 			attributes.put("target", func.getTarget());
 			tree.setAttributes(attributes);

@@ -64,7 +64,7 @@ public class AdminAction extends BaseAction{
 	 * 后台首页左边页面
 	 * @throws Exception 
 	 */
-	public String left() throws Exception{
+	public void left() throws Exception{
 		List<Func> funcTreeList=null;
 		//先清除session变量
 		Site manageSite=null;
@@ -132,11 +132,20 @@ public class AdminAction extends BaseAction{
 					}
 				}
 			}
-			List<TreeMenu> ptreeMenuList=new ArrayList<TreeMenu>();
-			for(TreeMenu ptreeMenu:treeMenuList){
+			
+			
+		//	String jsonTreeMenu=JsonUtil.objectToJson(ptreeMenuList);
+			//getHttpSession().setAttribute("funcs", funcTreeList);
+			getHttpSession().setAttribute("funcs", treeMenuList);
+		}
+		List<TreeMenu> sessionFuncs=(List<TreeMenu>) getHttpSession().getAttribute("funcs");
+		List<TreeMenu> ptreeMenuList=new ArrayList<TreeMenu>();
+		
+		if(sessionFuncs!=null||sessionFuncs.size()!=0){
+			for(TreeMenu ptreeMenu:sessionFuncs){
 				if(ptreeMenu.getPid().equals(funcid)){
 					ptreeMenuList.add(ptreeMenu);
-					for(TreeMenu cTreeMenu:treeMenuList){
+					for(TreeMenu cTreeMenu:sessionFuncs){
 						if(ptreeMenu.getId().equals(cTreeMenu.getPid())){
 							ptreeMenuList.add(cTreeMenu);
 						}
@@ -144,16 +153,10 @@ public class AdminAction extends BaseAction{
 				}
 				
 			}
-			String jsonTreeMenu=JsonUtil.objectToJson(ptreeMenuList);
-			//getHttpSession().setAttribute("funcs", funcTreeList);
-			getHttpSession().setAttribute("funcs", jsonTreeMenu);
+			objectToJsonString(ptreeMenuList);
 		}
-		/*List<TreeMenu> sessionFuncs=(List<TreeMenu>) getHttpSession().getAttribute("funcs");
-		if(sessionFuncs!=null||sessionFuncs.size()!=0){
-			objectToJsonString(sessionFuncs);
-		}*/
 		
-		return "left";
+//		return "left";
 	}
 	/**
 	 * 头部
