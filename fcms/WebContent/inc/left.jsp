@@ -7,12 +7,14 @@
 	
 	var treeSting;
 	var treeArray=new Array();
-	//treeSting=<%=session.getAttribute("funcs")%>;
-	/* for(i=0;i<treeSting.length;i++){
+	treeSting=<%=session.getAttribute("funcs")%>;
+	/*  for(i=0;i<treeSting.length;i++){
 		d=treeSting[i];
-		
-	} */
-//	funcid="<s:property value="funcid" />";
+		if(funcid==d.parid){
+			treeArray.push(d);
+		}
+	}  */
+	funcid="<s:property value="funcid" />";
 //	var dataObj=eval("("+treeSting+")");//转换为json对象
 	//dataObj= jQuery.parseJSON(treeSting);
 /*  	for(i=0;i<dataObj.length;i++){
@@ -24,9 +26,9 @@
  	debugger
  	aArray=treeArray;
 		 mainMenu = $('#mainMenu').tree({
-			  url : sy.basePath  + '/admin/admin_left.do',  
-
-			parentField : 'pid',
+			 // url : sy.basePath  + '/admin/admin_left.do',  
+			data:treeSting,
+		 	parentField : 'pid', 
 			onClick : function(node) {
 				debugger
 				if (node.attributes.url) {

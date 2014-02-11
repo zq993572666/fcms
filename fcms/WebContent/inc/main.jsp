@@ -91,7 +91,9 @@
 </script>
 </head>
 <body id="mainLayout" class="easyui-layout">
-<frame name="left" scrolling="auto" marginwidth="0" marginheight="0" src="/admin/admin_left.do" noresize />
+<div data-options="region:'west',href:'',split:true" title="导航" style="width: 200px; padding: 10px;">
+	<frame name="left" scrolling="auto" marginwidth="0" marginheight="0" src="/admin/admin_left.do" noresize />
+</div>
 	<div data-options="region:'center'" style="overflow: hidden;">
 		<div id="mainTabs">
 			<div title="关于SSHE" data-options="iconCls:'ext-icon-heart'">

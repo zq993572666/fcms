@@ -1,6 +1,6 @@
 package cn.freeteam.action;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -132,14 +132,26 @@ public class AdminAction extends BaseAction{
 					}
 				}
 			}
-			//String jsonTreeMenu=JsonUtil.objectToJson(treeMenuList);
+			List<TreeMenu> ptreeMenuList=new ArrayList<TreeMenu>();
+			for(TreeMenu ptreeMenu:treeMenuList){
+				if(ptreeMenu.getPid().equals(funcid)){
+					ptreeMenuList.add(ptreeMenu);
+					for(TreeMenu cTreeMenu:treeMenuList){
+						if(ptreeMenu.getId().equals(cTreeMenu.getPid())){
+							ptreeMenuList.add(cTreeMenu);
+						}
+					}
+				}
+				
+			}
+			String jsonTreeMenu=JsonUtil.objectToJson(ptreeMenuList);
 			//getHttpSession().setAttribute("funcs", funcTreeList);
-			getHttpSession().setAttribute("funcs", treeMenuList);
+			getHttpSession().setAttribute("funcs", jsonTreeMenu);
 		}
-		List<TreeMenu> sessionFuncs=(List<TreeMenu>) getHttpSession().getAttribute("funcs");
+		/*List<TreeMenu> sessionFuncs=(List<TreeMenu>) getHttpSession().getAttribute("funcs");
 		if(sessionFuncs!=null||sessionFuncs.size()!=0){
 			objectToJsonString(sessionFuncs);
-		}
+		}*/
 		
 		return "left";
 	}

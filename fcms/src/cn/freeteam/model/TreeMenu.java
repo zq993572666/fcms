@@ -13,7 +13,7 @@ public class TreeMenu implements java.io.Serializable {
 
 	private String id;
 	private String text;
-	private String state = "open";// open,closed
+	private String state = "closed";// open,closed
 	private boolean checked = false;
 	private Object attributes;
 	private List<TreeMenu> children;
