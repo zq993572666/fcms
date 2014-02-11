@@ -157,9 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 		</div>
 	</div>
-	<div data-options="region:'bottom',href:'bottom.jsp'" style="height: 30px; overflow: hidden;">
-	</div>
-
+	<div data-options="region:'south',href:'bottom.jsp',border:false" style="height: 30px; overflow: hidden;"></div>
 	
 </body>
 </html>
