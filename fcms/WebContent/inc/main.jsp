@@ -209,6 +209,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<div data-options="region:'north',href:'<%=basePath%>/admin/admin_top.do'" style="height: 70px; overflow: hidden;" class="logo"></div>
 	<div data-options="region:'west',href:'',split:true" title="导航" style="width: 200px; padding: 10px;">
+		<s:if test="%{#session.manageSite != null}">
+			<a href="javascript:void(0);" id="managerName" title="点击选择管理站点" onclick="managerSite();" class="easyui-menubutton" data-options="iconCls:'ext-icon-rainbow'"><fs:string len="8" str="${manageSite.name }"></fs:string></a> 
+			<img style="cursor:hand" onclick="window.open('<%=basePath %>site/${manageSite.sourcepath }/index.html');" title="点击预览站点" src="../img/www.gif">
+		</s:if>
+		<s:if test="%{#session.manageSite == null}">
+			<a href="javascript:void(0);" title="点击选择管理站点" onclick="managerSite();" class="easyui-menubutton" data-options="iconCls:'ext-icon-rainbow'">请选择管理站点</a> 
+		</s:if>
 		<ul id="mainMenu"></ul>
 	</div>
 	<div data-options="region:'center'" style="overflow: hidden;">
