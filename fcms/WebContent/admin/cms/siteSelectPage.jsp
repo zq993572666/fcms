@@ -40,7 +40,7 @@
 			<s:iterator value="siteList" status="bean">
 				<li id="<s:property value="id"/>" class="hasChildren">
 					<span><font size="2">
-					<a href="#" onclick="showDetail('<s:property value="id"/>','<s:property value="name"/>','')"><b><s:property value="name"/></b></a></font>
+					<a href="#" onclick="show('<s:property value="id"/>','<s:property value="name"/>','')"><b><s:property value="name"/></b></a></font>
 					</span>
 					<ul>
 						<li><span  >&nbsp;</span></li>
@@ -52,7 +52,7 @@
 			<s:iterator value="siteList" status="bean">
 				<li id="<s:property value="id"/>" class="hasChildren">
 					<span><font size="2">
-					<a href="#" onclick="showDetail('<s:property value="id"/>','<s:property value="name"/>','')"><b><s:property value="name"/></b></a></font>
+					<a href="#" onclick="show('<s:property value="id"/>','<s:property value="name"/>','')"><b><s:property value="name"/></b></a></font>
 					</span>
 				</li>
 			</s:iterator>
@@ -77,8 +77,11 @@
 		});
 	}
 	initTreesPar();
-	function showDetail(id,name,siteid){
-		parent.left.location.href="../admin_left.do?siteid="+id;
+	function show(id,name,siteid){
+		debugger
+		//parent.left.location.href="../admin_left.do?siteid="+id;
+		
+		window.parent.flushMenuBySite(id);
 	}
 	</script>
 	</body>
