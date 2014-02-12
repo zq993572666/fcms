@@ -1,7 +1,9 @@
 package cn.freeteam.action;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -139,21 +141,28 @@ public class AdminAction extends BaseAction{
 			getHttpSession().setAttribute("funcs", treeMenuList);
 		}
 		List<TreeMenu> sessionFuncs=(List<TreeMenu>) getHttpSession().getAttribute("funcs");
-		List<TreeMenu> ptreeMenuList=new ArrayList<TreeMenu>();
-		
+		Set<TreeMenu> ptreeMenuList=new HashSet<TreeMenu>();
+		List<TreeMenu> tempList=new ArrayList<TreeMenu>();
 		if(sessionFuncs!=null||sessionFuncs.size()!=0){
 			for(TreeMenu ptreeMenu:sessionFuncs){
 				if(ptreeMenu.getPid().equals(funcid)){
 					ptreeMenuList.add(ptreeMenu);
+					tempList.add(ptreeMenu);
 					for(TreeMenu cTreeMenu:sessionFuncs){
+						if(tempList.contains(cTreeMenu)){
+							continue;
+						}
 						if(ptreeMenu.getId().equals(cTreeMenu.getPid())){
 							ptreeMenuList.add(cTreeMenu);
+							tempList.add(ptreeMenu);
 						}
 					}
 				}
 				
 			}
-			objectToJsonString(ptreeMenuList);
+				String jsonTreeMenu=JsonUtil.objectToJson(ptreeMenuList);
+			//getHttpSession().setAttribute("jsonTreeMenu", funcTreeList);
+				objectToJsonString(ptreeMenuList);
 		}
 		
 //		return "left";
