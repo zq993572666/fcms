@@ -4,11 +4,6 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<package name="tag" extends="struts-default" namespace="/tag">  
-	       <action name="add" class="cn.freeteam.button.ButtonActionTest" method="add">  
-	          <result name="add">/tagTest/buttonTag.jsp</result>  
-	      </action>  
-	</package> 
 	<package name="cmsAdmin" extends="struts-default" namespace="/admin/cms">
 		<global-results>
 			<result name="msg" >/msg.jsp</result>

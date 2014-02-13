@@ -21,12 +21,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 data:treeSting, 
 		 	parentField : 'pid', 
 			onClick :function(node) {
+				debugger
 				if (node.attributes.url) {
 					linkUrl=node.attributes.url;
 					 if(linkUrl.indexOf("?")>-1){
-						linkUrl+="&pageFuncId=<s:property value="id"/>";
+						linkUrl+="&pageFuncId="+node.id;
+					}else{
+						linkUrl+="?pageFuncId="+node.id;
 					}
-				linkUrl+="?pageFuncId=<s:property value="id"/>";
 				var src =sy.basePath+"/admin/"+linkUrl; 
 					
 					if (node.attributes.target && node.attributes.target.length > 0) {
@@ -48,10 +50,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						}
 					}
 				}
-			}  ,onBeforeExpand:function(node) {
-				 var node = $('#mainMenu').tree('getSelected');
-			        var b = $('#mainMenu').tree('isLeaf', node.target);
-			      //  alert(b);
 			}  
 			
 		});    
@@ -217,7 +215,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body id="mainLayout" class="easyui-layout">
 
-	<div data-options="region:'north',href:'<%=basePath%>/admin/admin_top.do'" style="height: 70px; overflow: hidden;" class="logo"></div>
+	<div data-options="region:'north',href:'<%=basePath%>/admin/admin_top.do'" style="height: 40px; overflow: hidden;" class="logo"></div>
 	<div data-options="region:'west',href:'',split:true" title="导航" style="width: 200px; padding: 10px;">
 		<a id="managerSite" class="easyui-menubutton" style="width:120px;height:37px;line-height:37px">    <center><s:if test="%{#session.manageSite != null}">
 			<span  id="managerName" title="点击选择管理站点" onclick="managerSite();" ><fs:string len="8" str="${manageSite.name }"></fs:string></span> 
@@ -232,7 +230,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<div data-options="region:'center'" style="">
 		<div id="mainTabs">
-			
+			<div title="关于SSHE" data-options="iconCls:'ext-icon-heart'">
+				<iframe src="<%=basePath%>/admin/admin_right.do" allowTransparency="true" style="border: 0; width: 100%; height: 99%;" frameBorder="0"></iframe>
+			</div>
 		</div>
 	</div>
 	<div data-options="region:'south',href:'foot.jsp',border:false" style="height: 30px; overflow: hidden;"></div>

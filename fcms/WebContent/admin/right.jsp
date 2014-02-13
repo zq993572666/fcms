@@ -8,9 +8,6 @@
 		<LINK rel=stylesheet type=text/css
 			href="../img/style3.css">
 		<script> 
- if (window.parent.location.href.toLowerCase().indexOf("/admin/index.jsp") == -1 ){
-window.parent.location.href  = "<%=checkParentBasePath%>admin/admin_right.do";
-}
 </script>
 <html>
 	<head>
@@ -180,12 +177,12 @@ function show(type){
 		}
 		document.write(hello);
 		</script>
-				${loginAdmin.loginname }
+				${loginAdmin.name }
 				<span class="f_size normal addrtitle" id="spanGreeting">。</span><span
 					id="accountType"></span>
 				<div class="oneheight"></div>
 				<div class="level level_no" style="">
-					欢迎使用FreeCMS系统 <br/>
+					欢迎使用sshe系统 <br/>
 			<jsp:include page="../util/sysInfo.jsp"></jsp:include>
 				</div>
 			</li>

@@ -52,12 +52,13 @@ a:link, a:visited ,a: hover, a:active{
 </div>
 <div class="columncontent" style="text-align:left">
 <ul class="container">
+
 	<s:iterator value="#session.funcs" id="bean">
 	<s:if test="%{#bean.parid==funcid}">
       <li class="menu">
           <ul>
 		    <li class="button">
-		    <a <s:if test="%{url!=''}">hrdef="<s:property value="url"/><s:if test="%{url.indexOf('?')>-1}">&pageFuncId=<s:property value="id"/></s:if><s:else>?pageFuncId=<s:property value="id"/></s:else>"</s:if> class="blue"><b><s:property value="name"/></b> <span></span></a>
+		    <a <s:if test="%{url!=''}">href="<s:property value="url"/><s:if test="%{url.indexOf('?')>-1}">&pageFuncId=<s:property value="id"/></s:if><s:else>?pageFuncId=<s:property value="id"/></s:else>"</s:if> class="blue"><b><s:property value="name"/></b> <span></span></a>
 		    </li>
 			
 			<s:if test='%{"1" == #bean.hasChildren}'>

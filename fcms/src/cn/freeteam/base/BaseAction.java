@@ -100,7 +100,7 @@ public class BaseAction extends BaseService{
 	
 	public void objectToJsonString(Object object){
 		getHttpResponse().setCharacterEncoding("UTF-8"); 
-		getHttpResponse().setContentType("application/json");  
+		getHttpResponse().setContentType("application/html");  
 		    try {
 				String jsonString=JsonUtil.objectToJson(object);
 				getHttpResponse().getWriter().print(jsonString);

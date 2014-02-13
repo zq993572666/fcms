@@ -7,5 +7,5 @@ String checkParentBasePath = request.getScheme()+"://"+request.getServerName()+"
 <script> 
 <%--  if (window.top.location.href.toLowerCase().indexOf("/admin/index.jsp") == -1 ){
 window.top.location.href  = "<%=checkParentBasePath%>login.jsp";
-} --%>
+ }--%>
 </script>

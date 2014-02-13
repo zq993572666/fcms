@@ -1,8 +1,10 @@
 package cn.freeteam.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -160,9 +162,13 @@ public class AdminAction extends BaseAction{
 				}
 				
 			}
-				String jsonTreeMenu=JsonUtil.objectToJson(ptreeMenuList);
+			manageSite=(Site)getHttpSession().getAttribute("manageSite");
+				Map map=new HashMap();
+				map.put("ptreeMenuList", ptreeMenuList);
+				map.put("manageSite", manageSite);
+				//String jsonTreeMenu=JsonUtil.objectToJson(map);
 			//getHttpSession().setAttribute("jsonTreeMenu", funcTreeList);
-				objectToJsonString(ptreeMenuList);
+				objectToJsonString(map);
 		}
 		
 //		return "left";
