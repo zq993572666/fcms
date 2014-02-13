@@ -15,9 +15,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var mainMenu;
 	var mainTabs;
 	var treeSting;
+	var site;
 	function ajaxLeftMenu(){
 		 mainMenu = $('#mainMenu').tree({
-				
 			 data:treeSting, 
 		 	parentField : 'pid', 
 			onClick :function(node) {
@@ -63,8 +63,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   async: false,
 			   url:sy.basePath+"/admin/admin_left.do",
 			   success: function(data){
-				   treeSting=data;
-			   }
+				   debugger
+				   treeSting=data.ptreeMenuList;
+			   },dataType:"json"
 			});
 		ajaxLeftMenu();
 			
@@ -147,32 +148,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	/*根据一级菜单（站点，会员，系统等）刷新系统左侧菜单*/
 	function flushMenu(fid){
-		
 	 	$.ajax({
 			   type: "POST",
 			   async: false,
 			   url:sy.basePath+"/admin/admin_left.do?funcid="+fid,
 			   success: function(data){
-				   treeSting=data;
-			   }
+				   site=data.manageSite;
+				   treeSting=data.ptreeMenuList;
+				
+			   },dataType:"json"
 			});
+	    changeSiteName(site);
 		ajaxLeftMenu();
 		
 	}
 	
 	/*根据选择的站点刷新系统左侧菜单*/
 	function flushMenuBySite(siteid){
-		
 		$.ajax({
 			   type: "POST",
 			   async: false,
 			   url:sy.basePath+"/admin/admin_left.do?siteid="+siteid,
 			   success: function(data){
-				   treeSting=data;
-			   }
+				   debugger
+				   site=data.manageSite;
+				   treeSting=data.ptreeMenuList;
+			   },dataType:"json"
 			});
+		debugger
+		  changeSiteName(site);
 		ajaxLeftMenu();
-		flushSiteName();
 		
 	}
 
@@ -194,14 +199,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		
 	}
-	function flushSiteName(){
-		var text;
-		var siteName;
-		 <s:if test="%{#session.manageSite != null}">
-			 text="<a href=\"javascript:void(0);\" title=\"点击选择管理站点\" onclick=\"managerSite();\" class=\"easyui-menubutton\" data-options=\"iconCls:'ext-icon-rainbow'\" >"+siteName+"</a>"+"<img style=\"cursor:hand\" onclick=\"window.open('<%=basePath %>site/${manageSite.sourcepath }/index.html');\" title=\"点击预览站点\" src=\"../img/www.gif\" >"; 
-		</s:if>
-		$('#siteMenu').text(text);
-		
+	function openNewWindow(sourcepath){
+		window.open('<%=basePath %>site/'+sourcepath+'/index.html');
+	}
+	/*刷新左侧导航条的站点名*/
+	function changeSiteName(manageSite){
+		debugger
+		if(manageSite){
+			text="<span  title=\"点击选择管理站点\" onclick=\"managerSite();\"  >"+manageSite.name+"</span>"+"&nbsp;&nbsp;<img style=\"cursor:hand\" onclick=\"window.open('<%=basePath %>site/"+manageSite.sourcepath+"/index.html');\" title=\"点击预览站点\" src=\"../img/www.gif\" >";
+			$('#managerSite').html(text);
+		}else{
+			text="<span  id=\"managerName\" title=\"点击选择管理站点\" onclick=\"managerSite();\" >请选择管理站点</span>"; 
+			$('#managerSite').html(text);
+		}
 	}
 </script>
 </head>
@@ -209,16 +219,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<div data-options="region:'north',href:'<%=basePath%>/admin/admin_top.do'" style="height: 70px; overflow: hidden;" class="logo"></div>
 	<div data-options="region:'west',href:'',split:true" title="导航" style="width: 200px; padding: 10px;">
-		<s:if test="%{#session.manageSite != null}">
-			<a href="javascript:void(0);" id="managerName" title="点击选择管理站点" onclick="managerSite();" class="easyui-menubutton" data-options="iconCls:'ext-icon-rainbow'"><fs:string len="8" str="${manageSite.name }"></fs:string></a> 
-			<img style="cursor:hand" onclick="window.open('<%=basePath %>site/${manageSite.sourcepath }/index.html');" title="点击预览站点" src="../img/www.gif">
+		<a id="managerSite" class="easyui-menubutton" style="width:120px;height:37px;line-height:37px">    <center><s:if test="%{#session.manageSite != null}">
+			<span  id="managerName" title="点击选择管理站点" onclick="managerSite();" ><fs:string len="8" str="${manageSite.name }"></fs:string></span> 
+			<img id='managerImg' style="cursor:hand" onclick="openNewWindow('${manageSite.sourcepath }');" title="点击预览站点" src="../img/www.gif">
 		</s:if>
 		<s:if test="%{#session.manageSite == null}">
-			<a href="javascript:void(0);" title="点击选择管理站点" onclick="managerSite();" class="easyui-menubutton" data-options="iconCls:'ext-icon-rainbow'">请选择管理站点</a> 
+			<span  id="managerName" title="点击选择管理站点" onclick="managerSite();"  >请选择管理站点</span> 
 		</s:if>
+		</center>
+		</a>
 		<ul id="mainMenu"></ul>
 	</div>
-	<div data-options="region:'center'" style="overflow: hidden;">
+	<div data-options="region:'center'" style="">
 		<div id="mainTabs">
 			
 		</div>

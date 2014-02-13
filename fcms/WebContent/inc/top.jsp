@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <div style="position: absolute; left: 200px; bottom: 0px;">
 <s:iterator value="funcList" status="status" id="bean">
-	<a href="javascript:void(0);" onclick="leftMenuFlush('<s:property value="id"/>');" class="easyui-menubutton" data-options="iconCls:'ext-icon-rainbow'"><s:property value="name"/></a> 
+	<a href="javascript:void(0);" onclick="leftMenuFlush('<s:property value="id"/>');" class="easyui-linkbutton" data-options="iconCls:''"><s:property value="name"/></a> 
 </s:iterator>
 </div>
 <div style="position: absolute; right: 0px; bottom: 0px;">
