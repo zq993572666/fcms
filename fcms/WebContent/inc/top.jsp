@@ -12,23 +12,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		p =window.parent;
 		p .flushMenu(fid);
 	}
-	var updatePwd=function(){
-		
+	
+	function openIndex(){
+		debugger
+		openWinAtMainTabs(sy.basePath+"/admin/admin_right.do",'系统首页');
 	}
-	var lockWindowFun = function() {
-		$.post(sy.contextPath + '/base/syuser!doNotNeedSessionAndSecurity_logout.sy', function(result) {
-			$('#loginDialog').dialog('open');
-		}, 'json');
+  	function updatePwd (){
+  		debugger
+  		url=sy.basePath + '/admin/pwd.jsp';
+		var dialog = parent.sy.modalDialog({
+			title : '修改密码',
+			url :url
+		});
 	};
+
 	var logoutFun = function() {
-		$.post(sy.contextPath + '/base/syuser!doNotNeedSessionAndSecurity_logout.sy', function(result) {
+		debugger
+	/* 	$.post(sy.contextPath + '/base/syuser!doNotNeedSessionAndSecurity_logout.sy', function(result) {
 			location.replace(sy.contextPath + '/index.jsp');
-		}, 'json');
+		}, 'json'); */
+		window.location.href='login_out.do';
+		
 	};
 	var showMyInfoFun = function() {
+		debugger
+		url=sy.basePath + '/admin/user_profile.jsp';
 		var dialog = parent.sy.modalDialog({
 			title : '我的信息',
-			url : sy.contextPath + '/securityJsp/userInfo.jsp'
+			url :url
 		});
 	};
 </script>
@@ -47,7 +58,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </s:iterator>
 </div>
 <div style="position: absolute; right: 0px; bottom: 0px;">
-	<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_pfMenu',iconCls:'ext-icon-rainbow'">更换皮肤</a> <a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_kzmbMenu',iconCls:'ext-icon-cog'">控制面板</a> <a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_zxMenu',iconCls:'ext-icon-disconnect'">注销</a>
+	<a href="javascript:void(0);" data-options="iconCls:'ext-icon-cog'" class="easyui-linkbutton"  onclick="openIndex('open');">系统首页</a>
+	<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_pfMenu',iconCls:'ext-icon-rainbow'">更换皮肤</a> 
+    <a href="javascript:void(0);"  data-options="iconCls:'ext-icon-disconnect'"  class="easyui-linkbutton" onclick="updatePwd();">修改密码</a>
+    <a href="javascript:void(0);"  data-options="iconCls:'ext-icon-disconnect'"  class="easyui-linkbutton" onclick="showMyInfoFun();">我的信息</a>
+    <a href="javascript:void(0);"  data-options="iconCls:'ext-icon-disconnect'"  class="easyui-linkbutton" onclick="logoutFun();">退出系统</a>
 </div>
 <div id="layout_north_pfMenu" style="width: 120px; display: none;">
 	<div onclick="sy.changeTheme('default');" title="default">default</div>
@@ -63,12 +78,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div onclick="sy.changeTheme('metro-red');" title="metro-red">metro-red</div>
 </div>
 <div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
-	<div data-options="iconCls:'ext-icon-user_edit'" onclick="$('#passwordDialog').dialog('open');">修改密码</div>
+	<div data-options="iconCls:'ext-icon-user_edit'" onclick="openIndex('open');">系统首页</div>
+</div>
+<div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
+	<div data-options="iconCls:'ext-icon-user_edit'" onclick="updatePwd();">修改密码</div>
 	<div class="menu-sep"></div>
 	<div data-options="iconCls:'ext-icon-user'" onclick="showMyInfoFun();">我的信息</div>
 </div>
 <div id="layout_north_zxMenu" style="width: 100px; display: none;">
-	<div data-options="iconCls:'ext-icon-lock'" onclick="lockWindowFun();">锁定窗口</div>
-	<div class="menu-sep"></div>
 	<div data-options="iconCls:'ext-icon-door_out'" onclick="logoutFun();">退出系统</div>
 </div>

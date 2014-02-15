@@ -49,6 +49,7 @@ if (StringUtils.indexOfIgnoreCase(User_Agent, "MSIE") > -1 && (StringUtils.index
 	out.println("<script src='" + contextPath + "/inc/jslib/jquery-2.0.3.js' type='text/javascript' charset='utf-8'></script>");
 }
 %>
+
 <%-- 引入jquery扩展 --%>
 <script src="<%=contextPath%>/inc/jslib/syExtJquery.js?version=<%=version%>" type="text/javascript" charset="utf-8"></script>
 
@@ -72,7 +73,8 @@ if (StringUtils.indexOfIgnoreCase(User_Agent, "MSIE") > -1 && (StringUtils.index
 <script type="text/javascript" src="<%=contextPath%>/inc/jslib/jquery-easyui-portal/jquery.portal.js" charset="utf-8"></script>
 <%-- 引入easyui扩展 --%>
 <script src="<%=contextPath%>/inc/jslib/syExtEasyUI.js?version=<%=version%>" type="text/javascript" charset="utf-8"></script>
-
+<%-- 引入EasyUI 自定义方法 --%>
+<script src="<%=contextPath%>/inc/jslib/custom_method/custom_method.js?version=<%=version%>" type="text/javascript" charset="utf-8"></script>
 <%-- 引入扩展图标 --%>
 <link rel="stylesheet" href="<%=contextPath%>/inc/style/syExtIcon.css?version=<%=version%>" type="text/css">
 
