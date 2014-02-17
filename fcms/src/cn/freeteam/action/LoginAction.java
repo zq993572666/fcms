@@ -29,13 +29,11 @@ import cn.freeteam.util.ResponseUtil;
  */
 
 public class LoginAction extends BaseAction{
-
 	private Users user;
 	private String ValidateCode;
 	private String RememberMe;
 	private String msg;
 	private UserService userService;
-	
 	public LoginAction() {
 		init("userService");
 	}
@@ -92,6 +90,10 @@ public class LoginAction extends BaseAction{
 	    session.removeAttribute("loginUnits");
 	    session.removeAttribute("loginRoles");
 	    session.removeAttribute("funcs");
+		return "login";
+	}
+	//退出
+	public String adminLogin(){
 		return "login";
 	}
 	public Users getUser() {
