@@ -1,7 +1,9 @@
 package cn.freeteam.dao;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 import cn.freeteam.model.Users;
 import cn.freeteam.model.UsersExample;
@@ -65,6 +67,7 @@ public interface UsersMapper {
      * @mbggenerated Tue Mar 01 20:39:43 CST 2011
      */
     List<Users> selectByExample(UsersExample example);
+    List<Users> selectByExample(UsersExample example, RowBounds rowBounds);
     List<Users> selectByExampleCache(UsersExample example);
 
     /**

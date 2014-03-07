@@ -6,6 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 
+
+import org.apache.ibatis.session.RowBounds;
+
 import cn.freeteam.base.BaseService;
 import cn.freeteam.dao.UsersMapper;
 import cn.freeteam.model.Users;
@@ -79,6 +82,15 @@ public class UserService extends BaseService{
 		UsersExample example=new UsersExample();
 		example.setOrderByClause(" loginName ");
 		return usersMapper.selectByExample(example);
+	}
+	/**
+	 * 查询所有用户
+	 * @return
+	 */
+	public List<Users> findPage(){
+		UsersExample example=new UsersExample();
+		example.setOrderByClause(" loginName ");
+		return usersMapper.selectByExample(example,new RowBounds(0, 10));
 	}
 	/**
 	 * 根据参数查询
