@@ -559,4 +559,7 @@
     select count(*) from freecms_users where 
         loginName = #{loginname,jdbcType=VARCHAR}
   </select>
+   <select id="testPage"  resultType="map">
+   	SELECT  * FROM freecms_func
+  </select>
 </mapper>

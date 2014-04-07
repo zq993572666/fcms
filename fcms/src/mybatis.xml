@@ -3,11 +3,10 @@
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <properties resource="db.properties"></properties>
+    <properties resource="db.properties">
+    <property name="dialect" value="mysql" />
+    </properties>
 	<!-- MyBatis实现物理分页 -->
-	<properties>
-		<property name="dialect" value="mysql" />
-	</properties>
 	<settings>
 		<setting name="defaultExecutorType" value="REUSE" />
 		<setting name="defaultStatementTimeout" value="30000" />
