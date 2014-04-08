@@ -2,10 +2,9 @@ package cn.freeteam.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
-
-
 
 import org.apache.ibatis.session.RowBounds;
 
@@ -87,10 +86,8 @@ public class UserService extends BaseService{
 	 * 查询所有用户
 	 * @return
 	 */
-	public List<Users> findPage(){
-		UsersExample example=new UsersExample();
-		example.setOrderByClause(" loginName ");
-		return usersMapper.selectByExample(example,new RowBounds(0, 10));
+	public List<Map<String,String>> findPage(){
+		return usersMapper.testPage(new RowBounds(0, 10));
 	}
 	/**
 	 * 根据参数查询

@@ -1,6 +1,7 @@
 package cn.freeteam.action;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.freeteam.base.BaseAction;
 import cn.freeteam.model.Users;
@@ -12,7 +13,7 @@ public class TestPage extends BaseAction{
 		init("userService");
 	}
 public String test(){
-	List<Users> users=userService.findPage();
+	List<Map<String, String>> users=userService.findPage();
 	return "test";
 }
 public UserService getUserService() {

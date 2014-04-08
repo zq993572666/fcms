@@ -5,11 +5,10 @@
 
 <struts>
 
-	<package name="test" extends="struts-default" namespace="/">
-		<action name="test" method="test" class="cn.freeteam.action.TestPage">
-			<result name="test" type="redirect">/test.jsp</result>
+	<package name="page" extends="struts-default" >
+		<action name="pageTest" class="cn.freeteam.action.PageTest" method="page">
+		<result >/pageTest.jsp</result>
 		</action>
 	</package>
-	
 
 </struts>

@@ -6,6 +6,7 @@ public class MysqlDialect extends Dialect{
 	public String getLimitString(String sql, int offset, int limit) {
 		sql = sql.trim();
 		StringBuffer buffer = new StringBuffer(sql.length() + 100);
+		buffer.append(sql);
 		buffer.append(" limit ");  
         buffer.append(offset);  
         buffer.append(",");  

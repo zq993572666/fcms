@@ -1,6 +1,7 @@
 package cn.freeteam.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
@@ -114,5 +115,6 @@ public interface UsersMapper {
     int updateByPrimaryKey(Users record);
     int updateLastLoginTime(Users record);
     int updatePwd(Users record);
-    int resetPwd(Users record);
+    List<Map<String,String>> testPage();
+   List<Map<String,String>> testPage(RowBounds rb);
 }
